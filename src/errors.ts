@@ -1,12 +1,26 @@
 import { Result, ResultAsync } from 'neverthrow';
 
 /**
+ * Union type of all possible error kinds
+ */
+export type FsErrorKind =
+  | 'FileNotFoundError'
+  | 'PermissionDeniedError'
+  | 'DirectoryNotEmptyError'
+  | 'FileAlreadyExistsError'
+  | 'NotADirectoryError'
+  | 'IsADirectoryError'
+  | 'InvalidArgumentError'
+  | 'IOError'
+  | 'UnknownError';
+
+/**
  * Base interface for all file system errors.
  * Provides a consistent structure for error handling across the library.
  */
 export interface FsError {
   /** The type of error that occurred */
-  readonly kind: string;
+  readonly kind: FsErrorKind;
   /** Human-readable error message */
   readonly message: string;
   /** The underlying cause of the error, if available */
@@ -24,7 +38,7 @@ export interface FsError {
  * Corresponds to Node.js ENOENT error.
  */
 export class FileNotFoundError implements FsError {
-  readonly kind = 'FileNotFoundError';
+  readonly kind = 'FileNotFoundError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -37,7 +51,7 @@ export class FileNotFoundError implements FsError {
  * Corresponds to Node.js EACCES and EPERM errors.
  */
 export class PermissionDeniedError implements FsError {
-  readonly kind = 'PermissionDeniedError';
+  readonly kind = 'PermissionDeniedError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -50,7 +64,7 @@ export class PermissionDeniedError implements FsError {
  * Corresponds to Node.js ENOTEMPTY error.
  */
 export class DirectoryNotEmptyError implements FsError {
-  readonly kind = 'DirectoryNotEmptyError';
+  readonly kind = 'DirectoryNotEmptyError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -63,7 +77,7 @@ export class DirectoryNotEmptyError implements FsError {
  * Corresponds to Node.js EEXIST error.
  */
 export class FileAlreadyExistsError implements FsError {
-  readonly kind = 'FileAlreadyExistsError';
+  readonly kind = 'FileAlreadyExistsError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -76,7 +90,7 @@ export class FileAlreadyExistsError implements FsError {
  * Corresponds to Node.js ENOTDIR error.
  */
 export class NotADirectoryError implements FsError {
-  readonly kind = 'NotADirectoryError';
+  readonly kind = 'NotADirectoryError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -89,7 +103,7 @@ export class NotADirectoryError implements FsError {
  * Corresponds to Node.js EISDIR error.
  */
 export class IsADirectoryError implements FsError {
-  readonly kind = 'IsADirectoryError';
+  readonly kind = 'IsADirectoryError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -102,7 +116,7 @@ export class IsADirectoryError implements FsError {
  * Corresponds to Node.js EINVAL error.
  */
 export class InvalidArgumentError implements FsError {
-  readonly kind = 'InvalidArgumentError';
+  readonly kind = 'InvalidArgumentError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -115,7 +129,7 @@ export class InvalidArgumentError implements FsError {
  * Used for errors that don't fall into more specific categories.
  */
 export class IOError implements FsError {
-  readonly kind = 'IOError';
+  readonly kind = 'IOError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -130,7 +144,7 @@ export class IOError implements FsError {
  * This is a catch-all for unexpected error conditions.
  */
 export class UnknownError implements FsError {
-  readonly kind = 'UnknownError';
+  readonly kind = 'UnknownError' as const;
   constructor(
     readonly message: string,
     readonly cause?: unknown,

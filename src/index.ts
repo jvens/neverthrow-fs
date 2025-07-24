@@ -38,6 +38,7 @@ export * as async from './async';
 
 // Re-export error types and utilities
 export * from './errors';
+export type { FsErrorKind } from './errors';
 
 // Re-export type definitions
 export * from './types';

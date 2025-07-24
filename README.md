@@ -99,9 +99,9 @@ const asyncResult = await fs.readFile('/file.txt', 'utf8');
 The library provides specific error types for better error handling:
 
 ```typescript
-import type { FsError } from '@jvens/neverthrow-fs';
+import type { FsError, FsErrorKind } from '@jvens/neverthrow-fs';
 
-// Available error types:
+// Available error types (strongly typed):
 // - FileNotFoundError (ENOENT)
 // - PermissionDeniedError (EACCES, EPERM)  
 // - DirectoryNotEmptyError (ENOTEMPTY)
@@ -113,6 +113,7 @@ import type { FsError } from '@jvens/neverthrow-fs';
 // - UnknownError (unexpected errors)
 
 function handleError(error: FsError) {
+  // TypeScript will provide exhaustive checking and autocomplete
   switch (error.kind) {
     case 'FileNotFoundError':
       console.log('File not found:', error.path);
@@ -123,9 +124,31 @@ function handleError(error: FsError) {
     case 'FileAlreadyExistsError':
       console.log('File already exists:', error.path);
       break;
-    default:
-      console.log('Unexpected error:', error.message);
+    case 'DirectoryNotEmptyError':
+      console.log('Directory not empty:', error.path);
+      break;
+    case 'NotADirectoryError':
+      console.log('Not a directory:', error.path);
+      break;
+    case 'IsADirectoryError':
+      console.log('Is a directory:', error.path);
+      break;
+    case 'InvalidArgumentError':
+      console.log('Invalid argument:', error.message);
+      break;
+    case 'IOError':
+      console.log('I/O error:', error.message, error.code);
+      break;
+    case 'UnknownError':
+      console.log('Unknown error:', error.message);
+      break;
+    // TypeScript will ensure all cases are handled
   }
+}
+
+// You can also use the FsErrorKind type directly
+function isFileNotFound(errorKind: FsErrorKind): boolean {
+  return errorKind === 'FileNotFoundError';
 }
 ```
 

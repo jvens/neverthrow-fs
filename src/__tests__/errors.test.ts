@@ -137,4 +137,41 @@ describe('mapNodeError', () => {
 
     expect(result.path).toBe('/provided/path.txt');
   });
+
+  it('should have narrowly typed kind property', () => {
+    const nodeError = new Error('ENOTDIR: not a directory') as NodeJS.ErrnoException;
+    nodeError.code = 'ENOTDIR';
+
+    const result = mapNodeError(nodeError);
+
+    // This test verifies that the kind is narrowly typed
+    expect(result.kind).toBe('NotADirectoryError');
+    
+    // TypeScript should allow exhaustive checking
+    function testExhaustiveSwitch(errorKind: typeof result.kind): string {
+      switch (errorKind) {
+        case 'FileNotFoundError':
+          return 'file not found';
+        case 'PermissionDeniedError':
+          return 'permission denied';
+        case 'DirectoryNotEmptyError':
+          return 'directory not empty';
+        case 'FileAlreadyExistsError':
+          return 'file exists';
+        case 'NotADirectoryError':
+          return 'not a directory';
+        case 'IsADirectoryError':
+          return 'is a directory';
+        case 'InvalidArgumentError':
+          return 'invalid argument';
+        case 'IOError':
+          return 'io error';
+        case 'UnknownError':
+          return 'unknown error';
+        // TypeScript will ensure this is exhaustive
+      }
+    }
+
+    expect(testExhaustiveSwitch(result.kind)).toBe('not a directory');
+  });
 });
