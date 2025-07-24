@@ -160,7 +160,16 @@ export class UnknownError implements FsError {
  * @returns A typed FsError instance
  */
 export function mapNodeError(error: unknown, path?: string): FsError {
-  if (error instanceof Error) {
+  // Check if this looks like a Node.js error by examining its structure
+  // This works in both Jest (where instanceof Error fails due to serialization)
+  // and production environments
+  const isNodeError =
+    error &&
+    typeof error === 'object' &&
+    'message' in error &&
+    typeof (error as any).message === 'string';
+
+  if (isNodeError) {
     const nodeErr = error as NodeJS.ErrnoException;
     const message = nodeErr.message || 'Unknown error';
 
@@ -185,7 +194,9 @@ export function mapNodeError(error: unknown, path?: string): FsError {
     }
   }
 
-  return new UnknownError(error instanceof Error ? error.message : String(error), error);
+  // Fallback for non-Error objects
+  const message = error instanceof Error ? error.message : String(error);
+  return new UnknownError(message, error);
 }
 
 /**
