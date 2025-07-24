@@ -11,6 +11,10 @@
  *
  * @example
  * ```typescript
+ * // Main import (recommended) - imports both sync and async functions
+ * import { readFile, readFileSync, writeFile, writeFileSync } from '@jvens/neverthrow-fs';
+ * 
+ * // Or import from specific modules
  * import { readFileSync } from '@jvens/neverthrow-fs/sync';
  * import { readFile } from '@jvens/neverthrow-fs/async';
  *

@@ -28,7 +28,7 @@ Note: `neverthrow` is a peer dependency and must be installed separately.
 ### Synchronous Operations
 
 ```typescript
-import { readFileSync, writeFileSync, existsSync } from '@jvens/neverthrow-fs/sync';
+import { readFileSync, writeFileSync, existsSync } from '@jvens/neverthrow-fs';
 
 // Reading a file
 const result = readFileSync('/path/to/file.txt', 'utf8');
@@ -55,7 +55,7 @@ if (exists.isOk() && exists.value) {
 ### Asynchronous Operations
 
 ```typescript
-import { readFile, writeFile, mkdir, stat } from '@jvens/neverthrow-fs/async';
+import { readFile, writeFile, mkdir, stat } from '@jvens/neverthrow-fs';
 
 // Reading a file asynchronously
 const result = await readFile('/path/to/file.txt', 'utf8');
