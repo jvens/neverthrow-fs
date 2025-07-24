@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jvens/neverthrow-fs/compare/v1.0.0...v1.0.1) (2025-07-24)
+
+
+### Bug Fixes
+
+* rename error kind to error name for consistency across error handling ([9e6a03e](https://github.com/jvens/neverthrow-fs/commit/9e6a03efbbd76a292d4204c324a8354c69a626b8))
+
 # 1.0.0 (2025-07-24)
 
 
