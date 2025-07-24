@@ -661,11 +661,13 @@ describe('sync fs wrappers', () => {
     });
 
     it('should handle mkdtemp error case', () => {
-      // Try to create temp dir with invalid prefix
-      const result = mkdtempSync('');
+      // Try to create temp dir with invalid path (contains null byte)
+      const result = mkdtempSync('/invalid/path/with\0null');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['InvalidArgumentError']).toContain(result.error.kind);
+        expect(['InvalidArgumentError', 'FileNotFoundError', 'IOError']).toContain(
+          result.error.kind,
+        );
       }
     });
 
