@@ -146,7 +146,7 @@ describe('mapNodeError', () => {
 
     // This test verifies that the kind is narrowly typed
     expect(result.kind).toBe('NotADirectoryError');
-    
+
     // TypeScript should allow exhaustive checking
     function testExhaustiveSwitch(errorKind: typeof result.kind): string {
       switch (errorKind) {

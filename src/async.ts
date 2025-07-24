@@ -10,13 +10,13 @@ import type {
   MkdirOptions,
   RmdirOptions,
   ReaddirOptions,
-  ReaddirResult,
   RmOptions,
   CpOptions,
   StatOptions,
   StatResult,
   FileHandle,
   Dir,
+  Dirent,
 } from './types';
 
 /**
@@ -220,13 +220,19 @@ export function opendir(
  * @param options - Options for reading
  * @returns ResultAsync containing array of filenames or Dirent objects
  */
-export function readdir<T extends ReaddirOptions = {}>(
+export function readdir(path: PathLike): FsResultAsync<string[]>;
+export function readdir(path: PathLike, options: { withFileTypes: true }): FsResultAsync<Dirent[]>;
+export function readdir(
   path: PathLike,
-  options?: T,
-): FsResultAsync<ReaddirResult<T>> {
-  return ResultAsync.fromPromise(
-    fs.readdir(path, options as any) as Promise<ReaddirResult<T>>,
-    (error) => mapNodeError(error, path.toString()),
+  options: ReaddirOptions,
+): FsResultAsync<string[] | Buffer[] | Dirent[]>;
+export function readdir(
+  path: PathLike,
+  options?: ReaddirOptions,
+): FsResultAsync<string[] | Buffer[] | Dirent[]> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return ResultAsync.fromPromise(fs.readdir(path, options as any), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -236,10 +242,7 @@ export function readdir<T extends ReaddirOptions = {}>(
  * @param options - Options for reading
  * @returns ResultAsync containing the file contents
  */
-export function readFile(
-  path: PathLike | FileHandle,
-  options?: { encoding?: null; flag?: string } | null,
-): FsResultAsync<Buffer>;
+export function readFile(path: PathLike | FileHandle): FsResultAsync<Buffer>;
 export function readFile(
   path: PathLike | FileHandle,
   options: { encoding: BufferEncoding; flag?: string } | BufferEncoding,
@@ -248,6 +251,7 @@ export function readFile(
   path: PathLike | FileHandle,
   options?: ReadFileOptions | BufferEncoding | null,
 ): FsResultAsync<string | Buffer> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return ResultAsync.fromPromise(fs.readFile(path, options as any), (error) =>
     mapNodeError(error, typeof path === 'object' && 'fd' in path ? undefined : path.toString()),
   );
@@ -325,7 +329,7 @@ export function rm(path: PathLike, options?: RmOptions): FsResultAsync<void> {
  * @param options - Options for stat
  * @returns ResultAsync containing file statistics
  */
-export function stat<T extends StatOptions = {}>(
+export function stat<T extends StatOptions = StatOptions>(
   path: PathLike,
   options?: T,
 ): FsResultAsync<StatResult<T>> {
@@ -340,7 +344,7 @@ export function stat<T extends StatOptions = {}>(
  * @param options - Options for stat
  * @returns ResultAsync containing file statistics
  */
-export function lstat<T extends StatOptions = {}>(
+export function lstat<T extends StatOptions = StatOptions>(
   path: PathLike,
   options?: T,
 ): FsResultAsync<StatResult<T>> {

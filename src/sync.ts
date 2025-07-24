@@ -9,10 +9,10 @@ import type {
   MkdirOptions,
   RmdirOptions,
   ReaddirOptions,
-  ReaddirResult,
   RmOptions,
   StatOptions,
   StatResult,
+  Dirent,
 } from './types';
 
 /**
@@ -163,12 +163,22 @@ export function mkdtempSync(
  * @param options - Options for reading
  * @returns Result containing array of filenames or Dirent objects
  */
-export function readdirSync<T extends ReaddirOptions = {}>(
+export function readdirSync(path: fs.PathLike): FsResult<string[]>;
+export function readdirSync(
   path: fs.PathLike,
-  options?: T,
-): FsResult<ReaddirResult<T>> {
+  options: { withFileTypes: true },
+): FsResult<Dirent[]>;
+export function readdirSync(
+  path: fs.PathLike,
+  options: ReaddirOptions,
+): FsResult<string[] | Buffer[] | Dirent[]>;
+export function readdirSync(
+  path: fs.PathLike,
+  options?: ReaddirOptions,
+): FsResult<string[] | Buffer[] | Dirent[]> {
   try {
-    const result = fs.readdirSync(path, options as any) as ReaddirResult<T>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = fs.readdirSync(path, options as any);
     return ok(result);
   } catch (error) {
     return err(mapNodeError(error, path.toString()));
@@ -181,10 +191,7 @@ export function readdirSync<T extends ReaddirOptions = {}>(
  * @param options - Options for reading
  * @returns Result containing the file contents
  */
-export function readFileSync(
-  path: fs.PathLike | number,
-  options?: { encoding?: null; flag?: string } | null,
-): FsResult<Buffer>;
+export function readFileSync(path: fs.PathLike | number): FsResult<Buffer>;
 export function readFileSync(
   path: fs.PathLike | number,
   options: { encoding: BufferEncoding; flag?: string } | BufferEncoding,
@@ -194,6 +201,7 @@ export function readFileSync(
   options?: ReadFileOptions | BufferEncoding | null,
 ): FsResult<string | Buffer> {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = fs.readFileSync(path, options as any);
     return ok(result);
   } catch (error) {
@@ -286,7 +294,7 @@ export function rmSync(path: fs.PathLike, options?: RmOptions): FsResult<void> {
  * @param options - Options for stat
  * @returns Result containing file statistics
  */
-export function statSync<T extends StatOptions = {}>(
+export function statSync<T extends StatOptions = StatOptions>(
   path: fs.PathLike,
   options?: T,
 ): FsResult<StatResult<T>> {
@@ -304,7 +312,7 @@ export function statSync<T extends StatOptions = {}>(
  * @param options - Options for stat
  * @returns Result containing file statistics
  */
-export function lstatSync<T extends StatOptions = {}>(
+export function lstatSync<T extends StatOptions = StatOptions>(
   path: fs.PathLike,
   options?: T,
 ): FsResult<StatResult<T>> {
