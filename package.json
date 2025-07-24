@@ -1,0 +1,93 @@
+{
+  "name": "@jvens/neverthrow-fs",
+  "version": "0.0.0-development",
+  "description": "Node.js fs and fs/promises wrapped in neverthrow Result types for type-safe error handling",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./sync": {
+      "require": "./dist/cjs/sync.js",
+      "import": "./dist/esm/sync.js",
+      "types": "./dist/types/sync.d.ts"
+    },
+    "./async": {
+      "require": "./dist/cjs/async.js",
+      "import": "./dist/esm/async.js",
+      "types": "./dist/types/async.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:cjs && npm run build:esm && npm run build:types",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "clean": "rm -rf dist",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvens/neverthrow-fs.git"
+  },
+  "keywords": [
+    "neverthrow",
+    "fs",
+    "filesystem",
+    "result",
+    "error-handling",
+    "typescript",
+    "type-safe",
+    "functional"
+  ],
+  "author": "jvens",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/jvens/neverthrow-fs/issues"
+  },
+  "homepage": "https://github.com/jvens/neverthrow-fs#readme",
+  "peerDependencies": {
+    "neverthrow": "^6.0.0 || ^7.0.0 || ^8.0.0"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2",
+    "semantic-release": "^24.2.7",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
