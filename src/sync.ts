@@ -88,11 +88,7 @@ export function chownSync(path: fs.PathLike, uid: number, gid: number): FsResult
  * @param mode - Optional mode for the copy
  * @returns Result indicating success or an FsError
  */
-export function copyFileSync(
-  src: fs.PathLike,
-  dest: fs.PathLike,
-  mode?: number,
-): FsResult<void> {
+export function copyFileSync(src: fs.PathLike, dest: fs.PathLike, mode?: number): FsResult<void> {
   try {
     fs.copyFileSync(src, dest, mode);
     return ok(undefined);
@@ -135,10 +131,7 @@ export function linkSync(existingPath: fs.PathLike, newPath: fs.PathLike): FsRes
  * @param options - Options for directory creation
  * @returns Result containing the path of the first directory created (if recursive) or undefined
  */
-export function mkdirSync(
-  path: fs.PathLike,
-  options?: MkdirOptions,
-): FsResult<string | undefined> {
+export function mkdirSync(path: fs.PathLike, options?: MkdirOptions): FsResult<string | undefined> {
   try {
     const result = fs.mkdirSync(path, options);
     return ok(result);

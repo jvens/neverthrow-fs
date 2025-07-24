@@ -105,6 +105,4 @@ export type ReaddirResult<T extends ReaddirOptions> = T extends { withFileTypes:
 /**
  * Result of stat operations with bigint option
  */
-export type StatResult<T extends StatOptions> = T extends { bigint: true }
-  ? BigIntStats
-  : Stats;
+export type StatResult<T extends StatOptions> = T extends { bigint: true } ? BigIntStats : Stats;

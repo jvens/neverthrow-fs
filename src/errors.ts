@@ -140,7 +140,7 @@ export class UnknownError implements FsError {
 /**
  * Maps Node.js file system errors to our custom error types.
  * This provides a consistent error interface regardless of the underlying error.
- * 
+ *
  * @param error - The error thrown by Node.js fs operations
  * @param path - Optional path to include in the error for context
  * @returns A typed FsError instance
@@ -167,20 +167,11 @@ export function mapNodeError(error: unknown, path?: string): FsError {
       case 'EINVAL':
         return new InvalidArgumentError(message, path || nodeErr.path, error);
       default:
-        return new IOError(
-          message,
-          path || nodeErr.path,
-          nodeErr.syscall,
-          nodeErr.code,
-          error,
-        );
+        return new IOError(message, path || nodeErr.path, nodeErr.syscall, nodeErr.code, error);
     }
   }
 
-  return new UnknownError(
-    error instanceof Error ? error.message : String(error),
-    error,
-  );
+  return new UnknownError(error instanceof Error ? error.message : String(error), error);
 }
 
 /**

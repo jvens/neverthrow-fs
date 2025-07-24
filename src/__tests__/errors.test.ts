@@ -77,7 +77,9 @@ describe('mapNodeError', () => {
   });
 
   it('should map EISDIR to IsADirectoryError', () => {
-    const nodeError = new Error('EISDIR: illegal operation on a directory') as NodeJS.ErrnoException;
+    const nodeError = new Error(
+      'EISDIR: illegal operation on a directory',
+    ) as NodeJS.ErrnoException;
     nodeError.code = 'EISDIR';
 
     const result = mapNodeError(nodeError);

@@ -56,7 +56,7 @@ describe('async fs wrappers', () => {
 
     it('should return error when reading non-existent file', async () => {
       const filePath = path.join(testDir, 'non-existent.txt');
-      
+
       const result = await readFile(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
@@ -94,14 +94,20 @@ describe('async fs wrappers', () => {
 
       const mkResult = await mkdir(dirPath);
       expect(mkResult.isOk()).toBe(true);
-      
-      const exists = await fs.access(dirPath).then(() => true).catch(() => false);
+
+      const exists = await fs
+        .access(dirPath)
+        .then(() => true)
+        .catch(() => false);
       expect(exists).toBe(true);
 
       const rmResult = await rmdir(dirPath);
       expect(rmResult.isOk()).toBe(true);
-      
-      const existsAfter = await fs.access(dirPath).then(() => true).catch(() => false);
+
+      const existsAfter = await fs
+        .access(dirPath)
+        .then(() => true)
+        .catch(() => false);
       expect(existsAfter).toBe(false);
     });
 
@@ -110,8 +116,11 @@ describe('async fs wrappers', () => {
 
       const result = await mkdir(dirPath, { recursive: true });
       expect(result.isOk()).toBe(true);
-      
-      const exists = await fs.access(dirPath).then(() => true).catch(() => false);
+
+      const exists = await fs
+        .access(dirPath)
+        .then(() => true)
+        .catch(() => false);
       expect(exists).toBe(true);
     });
 
@@ -159,11 +168,17 @@ describe('async fs wrappers', () => {
 
       const result = await rename(oldPath, newPath);
       expect(result.isOk()).toBe(true);
-      
-      const oldExists = await fs.access(oldPath).then(() => true).catch(() => false);
+
+      const oldExists = await fs
+        .access(oldPath)
+        .then(() => true)
+        .catch(() => false);
       expect(oldExists).toBe(false);
-      
-      const newExists = await fs.access(newPath).then(() => true).catch(() => false);
+
+      const newExists = await fs
+        .access(newPath)
+        .then(() => true)
+        .catch(() => false);
       expect(newExists).toBe(true);
     });
 
@@ -187,8 +202,11 @@ describe('async fs wrappers', () => {
 
       const result = await unlink(filePath);
       expect(result.isOk()).toBe(true);
-      
-      const exists = await fs.access(filePath).then(() => true).catch(() => false);
+
+      const exists = await fs
+        .access(filePath)
+        .then(() => true)
+        .catch(() => false);
       expect(exists).toBe(false);
     });
 
@@ -246,8 +264,11 @@ describe('async fs wrappers', () => {
 
       const result = await rm(filePath);
       expect(result.isOk()).toBe(true);
-      
-      const exists = await fs.access(filePath).then(() => true).catch(() => false);
+
+      const exists = await fs
+        .access(filePath)
+        .then(() => true)
+        .catch(() => false);
       expect(exists).toBe(false);
     });
 
@@ -258,8 +279,11 @@ describe('async fs wrappers', () => {
 
       const result = await rm(dirPath, { recursive: true });
       expect(result.isOk()).toBe(true);
-      
-      const exists = await fs.access(dirPath).then(() => true).catch(() => false);
+
+      const exists = await fs
+        .access(dirPath)
+        .then(() => true)
+        .catch(() => false);
       expect(exists).toBe(false);
     });
   });

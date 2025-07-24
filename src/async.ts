@@ -26,9 +26,8 @@ import type {
  * @returns ResultAsync indicating success or an FsError
  */
 export function access(path: PathLike, mode?: number): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.access(path, mode),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.access(path, mode), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -44,9 +43,8 @@ export function appendFile(
   data: string | Uint8Array,
   options?: AppendFileOptions,
 ): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.appendFile(file, data, options),
-    (error) => mapNodeError(error, typeof file === 'object' && 'fd' in file ? undefined : file.toString()),
+  return ResultAsync.fromPromise(fs.appendFile(file, data, options), (error) =>
+    mapNodeError(error, typeof file === 'object' && 'fd' in file ? undefined : file.toString()),
   );
 }
 
@@ -57,9 +55,8 @@ export function appendFile(
  * @returns ResultAsync indicating success or an FsError
  */
 export function chmod(path: PathLike, mode: Mode): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.chmod(path, mode),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.chmod(path, mode), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -71,9 +68,8 @@ export function chmod(path: PathLike, mode: Mode): FsResultAsync<void> {
  * @returns ResultAsync indicating success or an FsError
  */
 export function chown(path: PathLike, uid: number, gid: number): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.chown(path, uid, gid),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.chown(path, uid, gid), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -84,14 +80,9 @@ export function chown(path: PathLike, uid: number, gid: number): FsResultAsync<v
  * @param mode - Optional mode for the copy
  * @returns ResultAsync indicating success or an FsError
  */
-export function copyFile(
-  src: PathLike,
-  dest: PathLike,
-  mode?: number,
-): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.copyFile(src, dest, mode),
-    (error) => mapNodeError(error, src.toString()),
+export function copyFile(src: PathLike, dest: PathLike, mode?: number): FsResultAsync<void> {
+  return ResultAsync.fromPromise(fs.copyFile(src, dest, mode), (error) =>
+    mapNodeError(error, src.toString()),
   );
 }
 
@@ -107,9 +98,8 @@ export function cp(
   dest: string | URL,
   options?: CpOptions,
 ): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.cp(src, dest, options),
-    (error) => mapNodeError(error, src.toString()),
+  return ResultAsync.fromPromise(fs.cp(src, dest, options), (error) =>
+    mapNodeError(error, src.toString()),
   );
 }
 
@@ -120,9 +110,8 @@ export function cp(
  * @returns ResultAsync indicating success or an FsError
  */
 export function link(existingPath: PathLike, newPath: PathLike): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.link(existingPath, newPath),
-    (error) => mapNodeError(error, existingPath.toString()),
+  return ResultAsync.fromPromise(fs.link(existingPath, newPath), (error) =>
+    mapNodeError(error, existingPath.toString()),
   );
 }
 
@@ -134,9 +123,8 @@ export function link(existingPath: PathLike, newPath: PathLike): FsResultAsync<v
  * @returns ResultAsync indicating success or an FsError
  */
 export function lchown(path: PathLike, uid: number, gid: number): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.lchown(path, uid, gid),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.lchown(path, uid, gid), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -147,9 +135,8 @@ export function lchown(path: PathLike, uid: number, gid: number): FsResultAsync<
  * @returns ResultAsync indicating success or an FsError
  */
 export function lchmod(path: PathLike, mode: Mode): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.lchmod(path, mode),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.lchmod(path, mode), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -165,9 +152,8 @@ export function lutimes(
   atime: string | number | Date,
   mtime: string | number | Date,
 ): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.lutimes(path, atime, mtime),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.lutimes(path, atime, mtime), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -177,13 +163,9 @@ export function lutimes(
  * @param options - Options for directory creation
  * @returns ResultAsync containing the path of the first directory created (if recursive) or undefined
  */
-export function mkdir(
-  path: PathLike,
-  options?: MkdirOptions,
-): FsResultAsync<string | undefined> {
-  return ResultAsync.fromPromise(
-    fs.mkdir(path, options),
-    (error) => mapNodeError(error, path.toString()),
+export function mkdir(path: PathLike, options?: MkdirOptions): FsResultAsync<string | undefined> {
+  return ResultAsync.fromPromise(fs.mkdir(path, options), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -212,9 +194,8 @@ export function open(
   flags?: string | number,
   mode?: Mode,
 ): FsResultAsync<FileHandle> {
-  return ResultAsync.fromPromise(
-    fs.open(path, flags, mode),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.open(path, flags, mode), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -228,9 +209,8 @@ export function opendir(
   path: PathLike,
   options?: { encoding?: BufferEncoding; bufferSize?: number },
 ): FsResultAsync<Dir> {
-  return ResultAsync.fromPromise(
-    fs.opendir(path, options),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.opendir(path, options), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -268,9 +248,8 @@ export function readFile(
   path: PathLike | FileHandle,
   options?: ReadFileOptions | BufferEncoding | null,
 ): FsResultAsync<string | Buffer> {
-  return ResultAsync.fromPromise(
-    fs.readFile(path, options as any),
-    (error) => mapNodeError(error, typeof path === 'object' && 'fd' in path ? undefined : path.toString()),
+  return ResultAsync.fromPromise(fs.readFile(path, options as any), (error) =>
+    mapNodeError(error, typeof path === 'object' && 'fd' in path ? undefined : path.toString()),
   );
 }
 
@@ -284,9 +263,8 @@ export function readlink(
   path: PathLike,
   options?: BufferEncoding | { encoding?: BufferEncoding },
 ): FsResultAsync<string> {
-  return ResultAsync.fromPromise(
-    fs.readlink(path, options),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.readlink(path, options), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -300,9 +278,8 @@ export function realpath(
   path: PathLike,
   options?: BufferEncoding | { encoding?: BufferEncoding },
 ): FsResultAsync<string> {
-  return ResultAsync.fromPromise(
-    fs.realpath(path, options),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.realpath(path, options), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -313,9 +290,8 @@ export function realpath(
  * @returns ResultAsync indicating success or an FsError
  */
 export function rename(oldPath: PathLike, newPath: PathLike): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.rename(oldPath, newPath),
-    (error) => mapNodeError(error, oldPath.toString()),
+  return ResultAsync.fromPromise(fs.rename(oldPath, newPath), (error) =>
+    mapNodeError(error, oldPath.toString()),
   );
 }
 
@@ -326,9 +302,8 @@ export function rename(oldPath: PathLike, newPath: PathLike): FsResultAsync<void
  * @returns ResultAsync indicating success or an FsError
  */
 export function rmdir(path: PathLike, options?: RmdirOptions): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.rmdir(path, options),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.rmdir(path, options), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -339,9 +314,8 @@ export function rmdir(path: PathLike, options?: RmdirOptions): FsResultAsync<voi
  * @returns ResultAsync indicating success or an FsError
  */
 export function rm(path: PathLike, options?: RmOptions): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.rm(path, options),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.rm(path, options), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -355,9 +329,8 @@ export function stat<T extends StatOptions = {}>(
   path: PathLike,
   options?: T,
 ): FsResultAsync<StatResult<T>> {
-  return ResultAsync.fromPromise(
-    fs.stat(path, options) as Promise<StatResult<T>>,
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.stat(path, options) as Promise<StatResult<T>>, (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -371,9 +344,8 @@ export function lstat<T extends StatOptions = {}>(
   path: PathLike,
   options?: T,
 ): FsResultAsync<StatResult<T>> {
-  return ResultAsync.fromPromise(
-    fs.lstat(path, options) as Promise<StatResult<T>>,
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.lstat(path, options) as Promise<StatResult<T>>, (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -384,14 +356,9 @@ export function lstat<T extends StatOptions = {}>(
  * @param type - Type of the link (only used on Windows)
  * @returns ResultAsync indicating success or an FsError
  */
-export function symlink(
-  target: PathLike,
-  path: PathLike,
-  type?: string,
-): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.symlink(target, path, type),
-    (error) => mapNodeError(error, path.toString()),
+export function symlink(target: PathLike, path: PathLike, type?: string): FsResultAsync<void> {
+  return ResultAsync.fromPromise(fs.symlink(target, path, type), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -402,9 +369,8 @@ export function symlink(
  * @returns ResultAsync indicating success or an FsError
  */
 export function truncate(path: PathLike, len?: number): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.truncate(path, len),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.truncate(path, len), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -414,10 +380,7 @@ export function truncate(path: PathLike, len?: number): FsResultAsync<void> {
  * @returns ResultAsync indicating success or an FsError
  */
 export function unlink(path: PathLike): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.unlink(path),
-    (error) => mapNodeError(error, path.toString()),
-  );
+  return ResultAsync.fromPromise(fs.unlink(path), (error) => mapNodeError(error, path.toString()));
 }
 
 /**
@@ -432,9 +395,8 @@ export function utimes(
   atime: string | number | Date,
   mtime: string | number | Date,
 ): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.utimes(path, atime, mtime),
-    (error) => mapNodeError(error, path.toString()),
+  return ResultAsync.fromPromise(fs.utimes(path, atime, mtime), (error) =>
+    mapNodeError(error, path.toString()),
   );
 }
 
@@ -446,11 +408,15 @@ export function utimes(
  */
 export function watch(
   filename: PathLike,
-  options?: { encoding?: BufferEncoding; persistent?: boolean; recursive?: boolean; signal?: AbortSignal },
+  options?: {
+    encoding?: BufferEncoding;
+    persistent?: boolean;
+    recursive?: boolean;
+    signal?: AbortSignal;
+  },
 ): FsResultAsync<AsyncIterable<fs.FileChangeInfo<string>>> {
-  return ResultAsync.fromPromise(
-    Promise.resolve(fs.watch(filename, options)),
-    (error) => mapNodeError(error, filename.toString()),
+  return ResultAsync.fromPromise(Promise.resolve(fs.watch(filename, options)), (error) =>
+    mapNodeError(error, filename.toString()),
   );
 }
 
@@ -463,11 +429,14 @@ export function watch(
  */
 export function writeFile(
   file: PathLike | FileHandle,
-  data: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView>,
+  data:
+    | string
+    | NodeJS.ArrayBufferView
+    | Iterable<string | NodeJS.ArrayBufferView>
+    | AsyncIterable<string | NodeJS.ArrayBufferView>,
   options?: WriteFileOptions,
 ): FsResultAsync<void> {
-  return ResultAsync.fromPromise(
-    fs.writeFile(file, data, options),
-    (error) => mapNodeError(error, typeof file === 'object' && 'fd' in file ? undefined : file.toString()),
+  return ResultAsync.fromPromise(fs.writeFile(file, data, options), (error) =>
+    mapNodeError(error, typeof file === 'object' && 'fd' in file ? undefined : file.toString()),
   );
 }

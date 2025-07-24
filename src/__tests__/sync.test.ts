@@ -55,7 +55,7 @@ describe('sync fs wrappers', () => {
 
     it('should return error when reading non-existent file', () => {
       const filePath = path.join(testDir, 'non-existent.txt');
-      
+
       const result = readFileSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
