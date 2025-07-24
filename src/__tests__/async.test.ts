@@ -79,7 +79,7 @@ describe('async fs wrappers', () => {
       const result = await readFile(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
         expect(result.error.message).toContain(filePath);
       }
@@ -101,7 +101,7 @@ describe('async fs wrappers', () => {
       const result = await access(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -150,7 +150,7 @@ describe('async fs wrappers', () => {
       const result = await mkdir(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileAlreadyExistsError']).toContain(result.error.kind);
+        expect(['FileAlreadyExistsError']).toContain(result.error.name);
         expect(result.error.message).toContain('EEXIST');
       }
     });
@@ -208,7 +208,7 @@ describe('async fs wrappers', () => {
       const result = await rename(oldPath, newPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -235,7 +235,7 @@ describe('async fs wrappers', () => {
       const result = await unlink(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -270,7 +270,7 @@ describe('async fs wrappers', () => {
       const result = await stat(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -325,7 +325,7 @@ describe('async fs wrappers', () => {
       const result = await chmod(filePath, 0o644);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -346,7 +346,7 @@ describe('async fs wrappers', () => {
       const result = await chown(filePath, 1000, 1000);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -372,7 +372,7 @@ describe('async fs wrappers', () => {
       const result = await copyFile(srcPath, destPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -398,7 +398,7 @@ describe('async fs wrappers', () => {
       const result = await cp(srcDir, destDir);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -428,7 +428,7 @@ describe('async fs wrappers', () => {
       const result = await link(srcPath, linkPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -478,7 +478,7 @@ describe('async fs wrappers', () => {
       const result = await lstat(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -534,7 +534,7 @@ describe('async fs wrappers', () => {
       const result = await open(filePath, 'r');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -565,7 +565,7 @@ describe('async fs wrappers', () => {
       const result = await opendir(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -608,7 +608,7 @@ describe('async fs wrappers', () => {
       const result = await readdir(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -634,7 +634,7 @@ describe('async fs wrappers', () => {
       const result = await readlink(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['InvalidArgumentError']).toContain(result.error.kind);
+        expect(['InvalidArgumentError']).toContain(result.error.name);
       }
     });
   });
@@ -659,7 +659,7 @@ describe('async fs wrappers', () => {
       const result = await realpath(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -689,7 +689,7 @@ describe('async fs wrappers', () => {
       const result = await symlink(filePath, linkPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileAlreadyExistsError']).toContain(result.error.kind);
+        expect(['FileAlreadyExistsError']).toContain(result.error.name);
       }
     });
   });
@@ -713,7 +713,7 @@ describe('async fs wrappers', () => {
       const result = await truncate(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -735,7 +735,7 @@ describe('async fs wrappers', () => {
       const result = await utimes(filePath, now, now);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -756,7 +756,7 @@ describe('async fs wrappers', () => {
       const result = await watch(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -810,7 +810,7 @@ describe('async fs wrappers', () => {
       const result = await rmdir(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['DirectoryNotEmptyError']).toContain(result.error.kind);
+        expect(['DirectoryNotEmptyError']).toContain(result.error.name);
       }
     });
 
@@ -820,7 +820,7 @@ describe('async fs wrappers', () => {
       const result = await appendFile(invalidPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -832,7 +832,7 @@ describe('async fs wrappers', () => {
       const result = await appendFile(dirPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IsADirectoryError']).toContain(result.error.kind);
+        expect(['IsADirectoryError']).toContain(result.error.name);
       }
     });
 
@@ -842,7 +842,7 @@ describe('async fs wrappers', () => {
       const result = await writeFile(invalidPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -854,7 +854,7 @@ describe('async fs wrappers', () => {
       const result = await writeFile(dirPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IsADirectoryError']).toContain(result.error.kind);
+        expect(['IsADirectoryError']).toContain(result.error.name);
       }
     });
 
@@ -867,7 +867,7 @@ describe('async fs wrappers', () => {
       const result = await readFile(handle);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IOError']).toContain(result.error.kind);
+        expect(['IOError']).toContain(result.error.name);
       }
     });
 
@@ -879,7 +879,7 @@ describe('async fs wrappers', () => {
       const result = await writeFile(handle, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IOError']).toContain(result.error.kind);
+        expect(['IOError']).toContain(result.error.name);
       }
     });
 
@@ -892,7 +892,7 @@ describe('async fs wrappers', () => {
       const result = await appendFile(handle, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IOError']).toContain(result.error.kind);
+        expect(['IOError']).toContain(result.error.name);
       }
     });
 
@@ -902,7 +902,7 @@ describe('async fs wrappers', () => {
       const result = await lchown(invalidPath, 1000, 1000);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -912,7 +912,7 @@ describe('async fs wrappers', () => {
       const result = await lchmod(invalidPath, 0o644);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError', 'IOError']).toContain(result.error.kind);
+        expect(['FileNotFoundError', 'IOError']).toContain(result.error.name);
       }
     });
 
@@ -923,7 +923,7 @@ describe('async fs wrappers', () => {
       const result = await lutimes(invalidPath, now, now);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -933,7 +933,7 @@ describe('async fs wrappers', () => {
       const result = await rm(invalidPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -942,7 +942,7 @@ describe('async fs wrappers', () => {
       const result = await mkdir('/dev/test-mkdir');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['PermissionDeniedError', 'FileNotFoundError']).toContain(result.error.kind);
+        expect(['PermissionDeniedError', 'FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -954,7 +954,7 @@ describe('async fs wrappers', () => {
       const result = await chmod('/dev/null', 0o644);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['PermissionDeniedError', 'IOError']).toContain(result.error.kind);
+        expect(['PermissionDeniedError', 'IOError']).toContain(result.error.name);
       }
     });
 
@@ -962,7 +962,7 @@ describe('async fs wrappers', () => {
       const result = await chown('/dev/null', 0, 0);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['PermissionDeniedError', 'IOError']).toContain(result.error.kind);
+        expect(['PermissionDeniedError', 'IOError']).toContain(result.error.name);
       }
     });
 
@@ -973,7 +973,7 @@ describe('async fs wrappers', () => {
       const result = await copyFile(srcPath, '/dev/null/invalid');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['NotADirectoryError', 'PermissionDeniedError']).toContain(result.error.kind);
+        expect(['NotADirectoryError', 'PermissionDeniedError']).toContain(result.error.name);
       }
     });
 
@@ -981,7 +981,7 @@ describe('async fs wrappers', () => {
       const result = await cp('/nonexistent/source', path.join(testDir, 'dest'));
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -992,7 +992,7 @@ describe('async fs wrappers', () => {
       const result = await link(srcPath, '/dev/null/invalid');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['NotADirectoryError', 'PermissionDeniedError']).toContain(result.error.kind);
+        expect(['NotADirectoryError', 'PermissionDeniedError']).toContain(result.error.name);
       }
     });
 
@@ -1000,7 +1000,7 @@ describe('async fs wrappers', () => {
       const result = await mkdir('/nonexistent/parent/child');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -1008,7 +1008,7 @@ describe('async fs wrappers', () => {
       const result = await opendir('/root/.ssh');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['PermissionDeniedError', 'FileNotFoundError']).toContain(result.error.kind);
+        expect(['PermissionDeniedError', 'FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -1019,7 +1019,7 @@ describe('async fs wrappers', () => {
       const result = await readlink(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['InvalidArgumentError']).toContain(result.error.kind);
+        expect(['InvalidArgumentError']).toContain(result.error.name);
       }
     });
 
@@ -1027,7 +1027,7 @@ describe('async fs wrappers', () => {
       const result = await realpath('/nonexistent/path');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -1039,7 +1039,7 @@ describe('async fs wrappers', () => {
       const result = await rename(srcPath, '/tmp/nonexistent/dest.txt');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError', 'PermissionDeniedError']).toContain(result.error.kind);
+        expect(['FileNotFoundError', 'PermissionDeniedError']).toContain(result.error.name);
       }
     });
 
@@ -1050,7 +1050,7 @@ describe('async fs wrappers', () => {
       const result = await stat(linkPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
 
@@ -1063,7 +1063,7 @@ describe('async fs wrappers', () => {
       const result = await symlink(targetPath, linkPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileAlreadyExistsError']).toContain(result.error.kind);
+        expect(['FileAlreadyExistsError']).toContain(result.error.name);
       }
     });
 
@@ -1074,7 +1074,7 @@ describe('async fs wrappers', () => {
       const result = await truncate(dirPath, 10);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IsADirectoryError']).toContain(result.error.kind);
+        expect(['IsADirectoryError']).toContain(result.error.name);
       }
     });
 
@@ -1085,7 +1085,7 @@ describe('async fs wrappers', () => {
       const result = await unlink(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IsADirectoryError', 'PermissionDeniedError']).toContain(result.error.kind);
+        expect(['IsADirectoryError', 'PermissionDeniedError']).toContain(result.error.name);
       }
     });
 
@@ -1096,7 +1096,7 @@ describe('async fs wrappers', () => {
       const result = await utimes(invalidPath, now, now);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });

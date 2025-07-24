@@ -3,7 +3,7 @@ import { Result, ResultAsync } from 'neverthrow';
 /**
  * Union type of all possible error kinds
  */
-export type FsErrorKind =
+export type FsErrorName =
   | 'FileNotFoundError'
   | 'PermissionDeniedError'
   | 'DirectoryNotEmptyError'
@@ -18,9 +18,9 @@ export type FsErrorKind =
  * Base interface for all file system errors.
  * Provides a consistent structure for error handling across the library.
  */
-export interface FsError {
+export interface FsError extends Error {
   /** The type of error that occurred */
-  readonly kind: FsErrorKind;
+  readonly name: FsErrorName;
   /** Human-readable error message */
   readonly message: string;
   /** The underlying cause of the error, if available */
@@ -38,7 +38,7 @@ export interface FsError {
  * Corresponds to Node.js ENOENT error.
  */
 export class FileNotFoundError implements FsError {
-  readonly kind = 'FileNotFoundError' as const;
+  readonly name = 'FileNotFoundError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -51,7 +51,7 @@ export class FileNotFoundError implements FsError {
  * Corresponds to Node.js EACCES and EPERM errors.
  */
 export class PermissionDeniedError implements FsError {
-  readonly kind = 'PermissionDeniedError' as const;
+  readonly name = 'PermissionDeniedError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -64,7 +64,7 @@ export class PermissionDeniedError implements FsError {
  * Corresponds to Node.js ENOTEMPTY error.
  */
 export class DirectoryNotEmptyError implements FsError {
-  readonly kind = 'DirectoryNotEmptyError' as const;
+  readonly name = 'DirectoryNotEmptyError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -77,7 +77,7 @@ export class DirectoryNotEmptyError implements FsError {
  * Corresponds to Node.js EEXIST error.
  */
 export class FileAlreadyExistsError implements FsError {
-  readonly kind = 'FileAlreadyExistsError' as const;
+  readonly name = 'FileAlreadyExistsError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -90,7 +90,7 @@ export class FileAlreadyExistsError implements FsError {
  * Corresponds to Node.js ENOTDIR error.
  */
 export class NotADirectoryError implements FsError {
-  readonly kind = 'NotADirectoryError' as const;
+  readonly name = 'NotADirectoryError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -103,7 +103,7 @@ export class NotADirectoryError implements FsError {
  * Corresponds to Node.js EISDIR error.
  */
 export class IsADirectoryError implements FsError {
-  readonly kind = 'IsADirectoryError' as const;
+  readonly name = 'IsADirectoryError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -116,7 +116,7 @@ export class IsADirectoryError implements FsError {
  * Corresponds to Node.js EINVAL error.
  */
 export class InvalidArgumentError implements FsError {
-  readonly kind = 'InvalidArgumentError' as const;
+  readonly name = 'InvalidArgumentError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -129,7 +129,7 @@ export class InvalidArgumentError implements FsError {
  * Used for errors that don't fall into more specific categories.
  */
 export class IOError implements FsError {
-  readonly kind = 'IOError' as const;
+  readonly name = 'IOError' as const;
   constructor(
     readonly message: string,
     readonly path?: string,
@@ -144,7 +144,7 @@ export class IOError implements FsError {
  * This is a catch-all for unexpected error conditions.
  */
 export class UnknownError implements FsError {
-  readonly kind = 'UnknownError' as const;
+  readonly name = 'UnknownError' as const;
   constructor(
     readonly message: string,
     readonly cause?: unknown,
@@ -164,10 +164,7 @@ export function mapNodeError(error: unknown, path?: string): FsError {
   // This works in both Jest (where instanceof Error fails due to serialization)
   // and production environments
   const isNodeError =
-    error &&
-    typeof error === 'object' &&
-    'message' in error &&
-    typeof (error as any).message === 'string';
+    error && typeof error === 'object' && 'message' in error && typeof error.message === 'string';
 
   if (isNodeError) {
     const nodeErr = error as NodeJS.ErrnoException;

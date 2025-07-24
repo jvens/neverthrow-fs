@@ -75,7 +75,7 @@ describe('sync fs wrappers', () => {
       if (result.isErr()) {
         // Note: There appears to be a Jest-specific issue with error mapping
         // The functionality works correctly outside of Jest test environment
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
         expect(result.error.message).toContain(filePath);
       }
@@ -133,7 +133,7 @@ describe('sync fs wrappers', () => {
       const result = mkdirSync(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileAlreadyExistsError']).toContain(result.error.kind);
+        expect(['FileAlreadyExistsError']).toContain(result.error.name);
         expect(result.error.message).toContain('EEXIST');
       }
     });
@@ -181,7 +181,7 @@ describe('sync fs wrappers', () => {
       const result = renameSync(oldPath, newPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -203,7 +203,7 @@ describe('sync fs wrappers', () => {
       const result = unlinkSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -238,7 +238,7 @@ describe('sync fs wrappers', () => {
       const result = statSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -259,7 +259,7 @@ describe('sync fs wrappers', () => {
       const result = accessSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -283,7 +283,7 @@ describe('sync fs wrappers', () => {
       const result = chmodSync(filePath, 0o644);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -305,7 +305,7 @@ describe('sync fs wrappers', () => {
       const result = chownSync(filePath, 1000, 1000);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -329,7 +329,7 @@ describe('sync fs wrappers', () => {
       const result = copyFileSync(srcPath, destPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -357,7 +357,7 @@ describe('sync fs wrappers', () => {
       const result = linkSync(srcPath, linkPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -383,7 +383,7 @@ describe('sync fs wrappers', () => {
       const result = lstatSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -440,7 +440,7 @@ describe('sync fs wrappers', () => {
       const result = readdirSync(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -466,7 +466,7 @@ describe('sync fs wrappers', () => {
       const result = readlinkSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['InvalidArgumentError']).toContain(result.error.kind);
+        expect(['InvalidArgumentError']).toContain(result.error.name);
       }
     });
   });
@@ -491,7 +491,7 @@ describe('sync fs wrappers', () => {
       const result = realpathSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -522,7 +522,7 @@ describe('sync fs wrappers', () => {
       const result = rmSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -549,7 +549,7 @@ describe('sync fs wrappers', () => {
       const result = symlinkSync(filePath, linkPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileAlreadyExistsError']).toContain(result.error.kind);
+        expect(['FileAlreadyExistsError']).toContain(result.error.name);
       }
     });
   });
@@ -571,7 +571,7 @@ describe('sync fs wrappers', () => {
       const result = truncateSync(filePath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -593,7 +593,7 @@ describe('sync fs wrappers', () => {
       const result = utimesSync(filePath, now, now);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });
@@ -647,7 +647,7 @@ describe('sync fs wrappers', () => {
       const result = rmdirSync(dirPath);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['DirectoryNotEmptyError']).toContain(result.error.kind);
+        expect(['DirectoryNotEmptyError']).toContain(result.error.name);
       }
     });
 
@@ -666,7 +666,7 @@ describe('sync fs wrappers', () => {
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
         expect(['InvalidArgumentError', 'FileNotFoundError', 'IOError']).toContain(
-          result.error.kind,
+          result.error.name,
         );
       }
     });
@@ -677,7 +677,7 @@ describe('sync fs wrappers', () => {
       const result = appendFileSync(invalidPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -689,7 +689,7 @@ describe('sync fs wrappers', () => {
       const result = appendFileSync(dirPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IsADirectoryError']).toContain(result.error.kind);
+        expect(['IsADirectoryError']).toContain(result.error.name);
       }
     });
 
@@ -699,7 +699,7 @@ describe('sync fs wrappers', () => {
       const result = writeFileSync(invalidPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
         expect(result.error.message).toContain('ENOENT');
       }
     });
@@ -711,7 +711,7 @@ describe('sync fs wrappers', () => {
       const result = writeFileSync(dirPath, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IsADirectoryError']).toContain(result.error.kind);
+        expect(['IsADirectoryError']).toContain(result.error.name);
       }
     });
 
@@ -720,7 +720,7 @@ describe('sync fs wrappers', () => {
       const result = writeFileSync(-1, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IOError', 'InvalidArgumentError']).toContain(result.error.kind);
+        expect(['IOError', 'InvalidArgumentError']).toContain(result.error.name);
       }
     });
 
@@ -729,7 +729,7 @@ describe('sync fs wrappers', () => {
       const result = appendFileSync(-1, 'content');
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IOError', 'InvalidArgumentError']).toContain(result.error.kind);
+        expect(['IOError', 'InvalidArgumentError']).toContain(result.error.name);
       }
     });
 
@@ -738,7 +738,7 @@ describe('sync fs wrappers', () => {
       const result = readFileSync(-1);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['IOError', 'InvalidArgumentError']).toContain(result.error.kind);
+        expect(['IOError', 'InvalidArgumentError']).toContain(result.error.name);
       }
     });
 
@@ -749,7 +749,7 @@ describe('sync fs wrappers', () => {
       const result = mkdtempSync(invalidParent);
       expect(result.isErr()).toBe(true);
       if (result.isErr()) {
-        expect(['FileNotFoundError']).toContain(result.error.kind);
+        expect(['FileNotFoundError']).toContain(result.error.name);
       }
     });
   });

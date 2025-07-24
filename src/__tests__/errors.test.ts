@@ -20,7 +20,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(FileNotFoundError);
-    expect(result.kind).toBe('FileNotFoundError');
+    expect(result.name).toBe('FileNotFoundError');
     expect(result.path).toBe('/test/file.txt');
     expect(result.cause).toBe(nodeError);
   });
@@ -32,7 +32,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError, '/test/file.txt');
 
     expect(result).toBeInstanceOf(PermissionDeniedError);
-    expect(result.kind).toBe('PermissionDeniedError');
+    expect(result.name).toBe('PermissionDeniedError');
     expect(result.path).toBe('/test/file.txt');
   });
 
@@ -43,7 +43,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(PermissionDeniedError);
-    expect(result.kind).toBe('PermissionDeniedError');
+    expect(result.name).toBe('PermissionDeniedError');
   });
 
   it('should map ENOTEMPTY to DirectoryNotEmptyError', () => {
@@ -53,7 +53,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(DirectoryNotEmptyError);
-    expect(result.kind).toBe('DirectoryNotEmptyError');
+    expect(result.name).toBe('DirectoryNotEmptyError');
   });
 
   it('should map EEXIST to FileAlreadyExistsError', () => {
@@ -63,7 +63,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(FileAlreadyExistsError);
-    expect(result.kind).toBe('FileAlreadyExistsError');
+    expect(result.name).toBe('FileAlreadyExistsError');
   });
 
   it('should map ENOTDIR to NotADirectoryError', () => {
@@ -73,7 +73,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(NotADirectoryError);
-    expect(result.kind).toBe('NotADirectoryError');
+    expect(result.name).toBe('NotADirectoryError');
   });
 
   it('should map EISDIR to IsADirectoryError', () => {
@@ -85,7 +85,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(IsADirectoryError);
-    expect(result.kind).toBe('IsADirectoryError');
+    expect(result.name).toBe('IsADirectoryError');
   });
 
   it('should map EINVAL to InvalidArgumentError', () => {
@@ -95,7 +95,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(InvalidArgumentError);
-    expect(result.kind).toBe('InvalidArgumentError');
+    expect(result.name).toBe('InvalidArgumentError');
   });
 
   it('should map unknown error codes to IOError', () => {
@@ -106,7 +106,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     expect(result).toBeInstanceOf(IOError);
-    expect(result.kind).toBe('IOError');
+    expect(result.name).toBe('IOError');
     expect(result.syscall).toBe('open');
     expect(result.code).toBe('EIO');
   });
@@ -115,7 +115,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError('string error');
 
     expect(result).toBeInstanceOf(UnknownError);
-    expect(result.kind).toBe('UnknownError');
+    expect(result.name).toBe('UnknownError');
     expect(result.message).toBe('string error');
   });
 
@@ -124,7 +124,7 @@ describe('mapNodeError', () => {
     const result = mapNodeError(error);
 
     expect(result).toBeInstanceOf(IOError);
-    expect(result.kind).toBe('IOError');
+    expect(result.name).toBe('IOError');
     expect(result.message).toBe('Some error');
   });
 
@@ -145,10 +145,10 @@ describe('mapNodeError', () => {
     const result = mapNodeError(nodeError);
 
     // This test verifies that the kind is narrowly typed
-    expect(result.kind).toBe('NotADirectoryError');
+    expect(result.name).toBe('NotADirectoryError');
 
     // TypeScript should allow exhaustive checking
-    function testExhaustiveSwitch(errorKind: typeof result.kind): string {
+    function testExhaustiveSwitch(errorKind: typeof result.name): string {
       switch (errorKind) {
         case 'FileNotFoundError':
           return 'file not found';
@@ -172,6 +172,6 @@ describe('mapNodeError', () => {
       }
     }
 
-    expect(testExhaustiveSwitch(result.kind)).toBe('not a directory');
+    expect(testExhaustiveSwitch(result.name)).toBe('not a directory');
   });
 });
