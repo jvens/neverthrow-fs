@@ -1,3 +1,18 @@
+# [1.1.0](https://github.com/jvens/neverthrow-fs/compare/v1.0.1...v1.1.0) (2025-08-05)
+
+
+### Bug Fixes
+
+* add "type": "module" to package.json and disable eslint for skipped tests in async.test.ts ([aa135a0](https://github.com/jvens/neverthrow-fs/commit/aa135a02cc44800f3195a3c77b8d0c5e4beaae38))
+* include '*.config.ts' in ESLint configuration and remove tsup.config.ts from TypeScript compilation ([783737f](https://github.com/jvens/neverthrow-fs/commit/783737fc5efeb608ceb2865674622a7adb823902))
+* include tsup.config.ts in TypeScript compilation ([04cea17](https://github.com/jvens/neverthrow-fs/commit/04cea17994358030f6ecd0a8a9d4e8a2246009cc))
+* set removeComments to false in tsconfig for better debugging ([63a983d](https://github.com/jvens/neverthrow-fs/commit/63a983da0dfc837ecddaa0cdb9dddc092b39a987))
+
+
+### Features
+
+* add script to fix ESM imports and update tsconfig for module resolution ([c659711](https://github.com/jvens/neverthrow-fs/commit/c659711ee6f876c132cd00bf2c16d96ac74bc21f))
+
 ## [1.0.1](https://github.com/jvens/neverthrow-fs/compare/v1.0.0...v1.0.1) (2025-07-24)
 
 
