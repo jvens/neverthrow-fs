@@ -446,6 +446,7 @@ describe('async fs wrappers', () => {
     });
 
     // Skip lchmod test as it's not available on all platforms
+    // eslint-disable-next-line jest/no-disabled-tests
     it.skip('should change symlink permissions', async () => {
       const filePath = path.join(testDir, 'lchmod.txt');
       const linkPath = path.join(testDir, 'lchmod-link.txt');
@@ -750,6 +751,7 @@ describe('async fs wrappers', () => {
     });
 
     // Skip this test as fs.watch doesn't immediately fail for non-existent paths
+    // eslint-disable-next-line jest/no-disabled-tests
     it.skip('should return error for non-existent path', async () => {
       const dirPath = path.join(testDir, 'not-exists');
 

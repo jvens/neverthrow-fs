@@ -2,6 +2,7 @@
   "name": "@jvens/neverthrow-fs",
   "version": "1.0.1",
   "description": "Node.js fs and fs/promises wrapped in neverthrow Result types for type-safe error handling",
+  "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
